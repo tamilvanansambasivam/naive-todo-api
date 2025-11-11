@@ -12,6 +12,12 @@ app.get("/api/todos", (req, res) => {
   res.json(todos);
 });
 
+app.get("/api/todos/:id", (req, res) => {
+  const todo = todos.find((t) => t.id === parseInt(req.params.id));
+  if (!todo) return res.status(404).json({ message: "Todo not found" });
+  res.json(todo);
+});
+
 const PORT = 3000;
 app.listen(PORT, () =>
   console.log(`Server running : http://localhost:${PORT}`)
