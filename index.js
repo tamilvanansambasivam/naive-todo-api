@@ -18,6 +18,16 @@ app.get("/api/todos/:id", (req, res) => {
   res.json(todo);
 });
 
+app.post("/api/todos", (req, res) => {
+  const newTodo = {
+    id: todos.length + 1,
+    title: req.body.title,
+    completed: false,
+  };
+  todos.push(newTodo);
+  res.status(201).json(newTodo);
+});
+
 const PORT = 3000;
 app.listen(PORT, () =>
   console.log(`Server running : http://localhost:${PORT}`)
