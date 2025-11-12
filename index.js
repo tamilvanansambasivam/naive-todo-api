@@ -28,6 +28,15 @@ app.post("/api/todos", (req, res) => {
   res.status(201).json(newTodo);
 });
 
+app.put("/api/todos/:id", (req, res) => {
+  const todo = todos.find((t) => t.id === parseInt(req.params.id));
+  if (!todo) return res.status(404).json({ message: "Todo not found" });
+
+  todo.title = req.body.title ?? todo.title;
+  todo.completed = req.body.completed ?? todo.completed;
+  res.json(todo);
+});
+
 const PORT = 3000;
 app.listen(PORT, () =>
   console.log(`Server running : http://localhost:${PORT}`)
