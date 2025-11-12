@@ -37,6 +37,11 @@ app.put("/api/todos/:id", (req, res) => {
   res.json(todo);
 });
 
+app.delete("/api/todos/:id", (req, res) => {
+  todos = todos.filter((t) => t.id !== parseInt(req.params.id));
+  res.json({ message: "Todo deleted" });
+});
+
 const PORT = 3000;
 app.listen(PORT, () =>
   console.log(`Server running : http://localhost:${PORT}`)
